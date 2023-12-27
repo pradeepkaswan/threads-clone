@@ -2,7 +2,7 @@ import Banner from '@/components/sections/banner'
 import LoginForm from '@/components/sections/login-form'
 import SiteFooter from '@/components/sections/site-footer'
 import SocialLogin from '@/components/sections/social-login'
-import QRCode from '@/components/ui/qr-code'
+import QRCode from '@/components/sections/qr-code'
 
 const LoginPage = () => {
   return (
