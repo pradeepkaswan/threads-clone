@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+const PrivacyEnum = ['PUBLIC', 'PRIVATE']
+
 const userSchema = mongoose.Schema(
   {
     fullname: {
