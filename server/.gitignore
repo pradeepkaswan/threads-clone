@@ -1,0 +1,23 @@
+# Node
+node_modules/
+npm-debug.log
+
+# Environment variables
+.env
+
+# Build directories
+dist/
+build/
+
+# macOS
+.DS_Store
+
+# Editor directories and files
+.vscode/
+
+# Logs
+logs/
+*.log
+
+# Miscellaneous
+.eslintcache
