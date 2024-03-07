@@ -1,13 +1,14 @@
 import ReactDOM from "react-dom/client"
 import HomePage from "./pages/HomePage.tsx"
 import "./index.css"
-import { RouterProvider, createBrowserRouter } from "react-router-dom"
+import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom"
 import ErrorPage from "./pages/ErrorPage.tsx"
 import RootLayout from "./components/layouts/RootLayout.tsx"
 import SearchPage from "./pages/SearchPage.tsx"
 import ActivityPage from "./pages/ActivityPage.tsx"
 import LoginPage from "./pages/LoginPage.tsx"
 import { ThemeProvider } from "./context/ThemeContext.tsx"
+import { AuthProvider, AuthContext } from "./context/AuthContext.tsx"
 
 const router = createBrowserRouter([
 	{
@@ -21,14 +22,25 @@ const router = createBrowserRouter([
 			{ path: ":username", element: <div>Profile</div> },
 		],
 	},
-	{ path: "/login", element: <LoginPage /> },
+	{
+		path: "/login",
+		element: (
+			<AuthContext.Consumer>
+				{(authContext) =>
+					authContext?.isLoggedIn ? <Navigate to="/" /> : <LoginPage />
+				}
+			</AuthContext.Consumer>
+		),
+	},
 ])
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<ThemeProvider
-		defaultTheme="system"
+		defaultTheme="dark"
 		storageKey="vite-ui-theme"
 	>
-		<RouterProvider router={router} />,
+		<AuthProvider>
+			<RouterProvider router={router} />,
+		</AuthProvider>
 	</ThemeProvider>,
 )

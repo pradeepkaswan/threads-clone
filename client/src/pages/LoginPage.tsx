@@ -1,43 +1,12 @@
 import Footer from "@/components/Footer"
 import { Icons } from "@/components/Icons"
 import { useWindowSize } from "@/hooks/useWindowSize"
-import console from "console"
-import { useState } from "react"
-import { Navigate } from "react-router-dom"
 import bgImage from "@/assets/bg.webp"
 import LoginForm from "@/components/forms/LoginForm"
+import QRCode from "@/components/QRCode"
 
 export default function LoginPage() {
 	const { isMobile } = useWindowSize()
-
-	const [username, setUsername] = useState("")
-	const [password, setPassword] = useState("")
-
-	const handleSubmit = async (e: React.FormEvent) => {
-		e.preventDefault()
-		const user = checkIfUserExists(username, password)
-
-		if (user) {
-			console.log("User exists")
-			try {
-				const res = await fetch("/api/login", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({ username, password }),
-				})
-				if (res.ok) {
-					const data = await res.json()
-					console.log(data)
-				}
-			} catch (error) {
-				console.error(error)
-			}
-		} else {
-			return <Navigate to="/account-setup" />
-		}
-	}
 
 	return (
 		<>
@@ -49,7 +18,7 @@ export default function LoginPage() {
 				) : (
 					<nav className="">
 						<img
-							className="h-[500px] w-full object-cover absolute"
+							className="h-[570px] w-full object-cover -mb-72"
 							src={bgImage}
 							alt="bg"
 						/>
@@ -58,6 +27,7 @@ export default function LoginPage() {
 			</header>
 			<LoginForm />
 			<Footer />
+			<QRCode />
 		</>
 	)
 }
