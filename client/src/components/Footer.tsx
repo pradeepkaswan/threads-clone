@@ -2,7 +2,7 @@ export default function Footer() {
 	const linkClasses = "text-gray-500 transition hover:opacity-75"
 
 	return (
-		<footer className="fixed bottom-6 mx-auto w-full max-w-screen-md md:max-w-screen-2xl lg:max-w-full">
+		<footer className="mt-5 absolute bottom-6 mx-auto w-full max-w-screen-md md:max-w-screen-2xl lg:max-w-full">
 			<ul className="flex flex-wrap justify-center gap-4 text-xs">
 				<li>
 					<a
