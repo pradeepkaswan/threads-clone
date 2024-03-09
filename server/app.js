@@ -1,24 +1,26 @@
+require("dotenv").config()
 const express = require("express")
 const cors = require("cors")
-const dotenv = require("dotenv")
-
-// Load environment variables from .env file
-dotenv.config()
-
-const connectDB = require("./utils/db")
+const { logger } = require("./middleware/logger")
+const connectDB = require("./config/db")
+const errorHandler = require("./middleware/errorHandler")
+const cookieParser = require("cookie-parser")
+const corsOptions = require("./config/corsOptions")
 
 const app = express()
 
-// Middleware
-app.use(cors())
-app.use(express.json())
-
-// Connect to MongoDB
 connectDB()
 
-// Routes
-// const threadRoutes = require('./routes/threadRoutes');
+// Middleware
+app.use(logger)
+app.use(cors(corsOptions))
+app.use(express.json())
+app.use(cookieParser())
 
-// app.use("/api/threads", threadRoutes)
+// Routes
+app.use("/api/v1/accounts", require("./routes/authRoutes"))
+// app.use("/api/posts", require("./routes/postRoutes"))
+
+app.use(errorHandler)
 
 module.exports = app
