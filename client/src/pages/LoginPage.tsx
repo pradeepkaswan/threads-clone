@@ -9,7 +9,7 @@ export default function LoginPage() {
   const { isMobile } = useWindowSize()
 
   return (
-    <div className="">
+    <div className="relative min-h-screen h-[550px] ">
       <header className="mx-auto max-w-screen-md md:max-w-screen-2xl lg:max-w-w[1800px]">
         {isMobile ? (
           <div className="flex items-center justify-center">
